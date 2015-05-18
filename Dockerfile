@@ -29,4 +29,4 @@ RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_VERSION-bin-hadoop
 
 RUN ln -s /usr/local/spark-$SPARK_VERSION-bin-hadoop2.4 /usr/local/spark
 
-CMD $SPARK_HOME/bin/spark-class org.apache.spark.deploy.master.Master
+CMD $SPARK_HOME/bin/spark-class org.apache.spark.deploy.master.Master -h `hostname --ip-address`
