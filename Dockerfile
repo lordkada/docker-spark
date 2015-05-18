@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --force-yes \
         curl
 
 # JAVA Setup
-ENV JAVA_HOME /usr/jdk1.8.0_31
+ENV JAVA_HOME /usr/jdk1.8.0_45
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN curl -sL --retry 3 --insecure \
         --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
@@ -28,6 +28,5 @@ ENV SPARK_HOME /usr/local/spark
 RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_VERSION-bin-hadoop2.4.tgz | tar -xz -C /usr/local/
 
 RUN ln -s /usr/local/spark-$SPARK_VERSION-bin-hadoop2.4 /usr/local/spark
-
 
 CMD $SPARK_HOME/bin/spark-class org.apache.spark.deploy.master.Master
