@@ -27,6 +27,12 @@ ENV SPARK_HOME /usr/local/spark
 
 RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_VERSION-bin-hadoop2.4.tgz | tar -xz -C /usr/local/
 
-RUN ln -s /usr/local/spark-$SPARK_VERSION-bin-hadoop2.4 /usr/local/spark
+RUN ln -s /usr/local/spark-$SPARK_VERSION-bin-hadoop2.4 $SPARK_HOME
 
-CMD $SPARK_HOME/bin/spark-class org.apache.spark.deploy.master.Master -h `hostname --ip-address`
+ADD scripts/master_start.sh /usr/local/master_start.sh
+RUN chmod +x /usr/local/master_start.sh
+
+ADD scripts/worker_start.sh /usr/local/worker_start.sh
+RUN chmod +x /usr/local/worker_start.sh
+
+CMD ["/usr/local/master_start.sh"]
